@@ -21,12 +21,15 @@ export const load: PageServerLoad = async ({ locals }) => {
 const register: Action = async ({ request }) => {
   const data = await request.formData()
   const username = data.get('username')
+  const nombre = data.get('nombre')
   const password = data.get('password')
 
   if (
     typeof username !== 'string' ||
+    typeof nombre !== 'string' ||
     typeof password !== 'string' ||
     !username ||
+    !nombre ||
     !password
   ) {
     return fail(400, { invalid: true })
@@ -43,6 +46,7 @@ const register: Action = async ({ request }) => {
   await db.user.create({
     data: {
       username,
+      nombre,
       passwordHash: await bcrypt.hash(password, 10),
       userAuthToken: crypto.randomUUID(),
       role: { connect: { name: Roles.USER } },

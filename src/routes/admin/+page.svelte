@@ -1,16 +1,21 @@
 <script lang="ts">
     import { page } from '$app/stores'
   </script>
-  
-  <h1>Admin</h1>
+   {#if $page.data.user.role === 'ADMIN'}
+   <form action="/logout" method="POST">
+     <button type="submit">Log out</button>
+   </form>
+ {/if}
+  <h1>Module Admin</h1>
   
   {#if $page.data.user}
-    <p>Welcome {$page.data.user.name}!</p>
+    <span>Welcome {$page.data.user.name}!</span>
   {/if}
   
-  {#if $page.data.user.role === 'ADMIN'}
-    <form action="/logout" method="POST">
-      <button type="submit">Log out</button>
-    </form>
-  {/if}
-  
+ 
+  <style>
+    span{
+      font-size: 30px;
+      text-align: center;
+    }
+  </style>

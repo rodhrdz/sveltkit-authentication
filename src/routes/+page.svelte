@@ -8,7 +8,7 @@
 </svelte:head>
 
 <section>
-	<h1>hola Mundo</h1>
+	<h1>Bienvenido!</h1>
 </section>
 
 <style>
